@@ -39,7 +39,7 @@ from transformers.data.processors.utils import (
 
 logger = logging.getLogger(__name__)
 
-SENTIMENT_LABELS = ["positive", "negative"]
+SENTIMENT_LABELS = ["positive", "negative","neutral"]
 
 POETRY_LABELS = ["شعر حر", "شعر التفعيلة", "عامي", "موشح", "الرجز",
                  "الرمل", "الهزج", "البسيط", "الخفيف", "السريع",
@@ -125,6 +125,7 @@ def convert_examples_to_features(examples, tokenizer,
     logger.info(label_map)
     features = []
     for (ex_index, example) in enumerate(examples):
+        print(example)
         if ex_index % 10000 == 0:
             logger.info("Writing example %d" % (ex_index))
 
@@ -215,9 +216,9 @@ class ArabicSentimentProcessor(DataProcessor):
         examples = []
         for (i, line) in enumerate(lines):
             guid = "%s-%s" % (set_type, i)
-            text_a = line[1]
-            text_a = self.process_tweet(line[1])
-            label = line[2]
+            text_a = line[0]
+            text_a = self.process_tweet(line[0])
+            label = line[1]
             examples.append(InputExample(guid=guid, text_a=text_a,
                                          label=label))
         return examples
@@ -458,6 +459,7 @@ class ArabicDIDProcessor_MADAR_6(DataProcessor):
 
         text = dediac.dediac_ar(text)
         return text
+
 
 class ArabicDIDProcessor_MADAR_Twitter(DataProcessor):
     """Processor for Arabic Dialect ID Classification on

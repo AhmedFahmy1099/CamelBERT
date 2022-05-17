@@ -29,7 +29,7 @@ Text classification tasks evaluation utils
 from sklearn.metrics import f1_score, precision_score, recall_score
 
 
-SENTIMENT_LABELS = ["positive", "negative"]
+SENTIMENT_LABELS = ["positive", "negative","neutral"]
 
 POETRY_LABELS = ["شعر حر", "شعر التفعيلة", "عامي", "موشح", "الرجز",
                  "الرمل", "الهزج", "البسيط", "الخفيف", "السريع",
